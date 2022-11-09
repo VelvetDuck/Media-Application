@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+<body class="bg-dark">
+    <section class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid d-flex">
+                <ul class="nav">
+                    <a class="navbar-brand" href="#">SomeApp</a>
+                </ul>
+
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <div class="btn-group">
+                            <button type="button" class="btn bg-0 border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="" th:src="@{${user.imageProfilePhotoUrl}}" width="32px" height="32px" style="border-radius: 50%;">
+                            </button>
+                            <ul class="dropdown-menu text-center" style="margin-left: -12em;
+                            width: 14em;
+                            background-color: #0E0E0E;
+                            ">
+                                <li style="height: 9em; width: 100%; pointer-events: none;">
+                                    <a class="dropdown-item text-center">
+                                        <img src="" th:src="@{${user.imageProfilePhotoUrl}}" width="32px" height="32px" style="border-radius: 50%;">
+                                        <p class="text-white" th:text="${user.displayName}"></p>
+                                    </a>
+
+                                </li>
+
+                                <li><a class="dropdown-item text-center mt-3 mb-3">
+                                    <p class="text-white">Customize Profile</p>
+                                </a></li>
+
+
+                                <li><a href="/createPost" class="dropdown-item text-center mt-3 mb-3">
+                                    <p class="text-white">Upload post</p>
+                                </a></li>
+
+                                <li><a style="background: none;" class="dropdown-item text-white mt-3 mb-3" href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+    <div class="d-flex flex-row">
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/text-animation-type.js}"></script>
+    </body>
+</html>
