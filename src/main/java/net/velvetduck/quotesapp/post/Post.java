@@ -22,6 +22,8 @@ public class Post {
     private String postTitle;
     private String postDescription;
     private String postName;
+
+    @Lob @Basic(fetch = FetchType.LAZY)
     private String postContext;
 
     private PostType postType;

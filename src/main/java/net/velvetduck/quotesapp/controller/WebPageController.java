@@ -1,5 +1,7 @@
 package net.velvetduck.quotesapp.controller;
 
+import net.velvetduck.quotesapp.post.PostRepository;
+import net.velvetduck.quotesapp.post.PostService;
 import net.velvetduck.quotesapp.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.common.ExpressionUtils;
@@ -28,19 +30,28 @@ public class WebPageController {
     private UserService userService;
 
     @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
     private SpringUserDetailsService springUserDetailsService;
 
     @GetMapping("/")
-    public String defaultPage(Model model){
+    public String defaultPage(Model model, @AuthenticationPrincipal SpringUserDetails springUserDetails){
 
-        return "index";
+        if(springUserDetails != null) {
+            model.addAttribute("user", springUserDetails.getUser());
+            model.addAttribute("posts", postRepository.findAll());
+
+
+            return "homepage";
+        }
+        else return "index";
     }
 
     @GetMapping("/homePage")
     public String homePage(Model model, @AuthenticationPrincipal SpringUserDetails springUserDetails){
         model.addAttribute("user", springUserDetails.getUser());
-
-        System.out.println(springUserDetails.getUser().getUsername());
+        model.addAttribute("posts", postRepository.findAll());
         return "homePage";
     }
 

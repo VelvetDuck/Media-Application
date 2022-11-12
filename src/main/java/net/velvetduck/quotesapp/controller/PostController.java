@@ -2,6 +2,7 @@ package net.velvetduck.quotesapp.controller;
 
 import net.velvetduck.quotesapp.post.Post;
 import net.velvetduck.quotesapp.post.PostRepository;
+import net.velvetduck.quotesapp.post.PostService;
 import net.velvetduck.quotesapp.post.PostType;
 import net.velvetduck.quotesapp.user.SpringUserDetails;
 import net.velvetduck.quotesapp.user.User;
@@ -34,6 +35,9 @@ public class PostController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PostService postService;
+
     private static final Logger postControllerLogger = Logger.getLogger("PostController_Logger");
 
     @GetMapping("/createPost")
@@ -59,6 +63,10 @@ public class PostController {
     public String viewAllPostsPage(
             @AuthenticationPrincipal SpringUserDetails springUserDetails,
             Model model){
+
+        long userId = springUserDetails.getUser().getId();
+        model.addAttribute("posts", postService.getAllPostByUserReferenceId(userId, new ArrayList<>()));
+        model.addAttribute("user", springUserDetails.getUser());
 
 
         return "editor/PostLibrary";
@@ -90,6 +98,9 @@ public class PostController {
                         });
 
         model.addAttribute("user", springUserDetails.getUser());
+
+        long userId = springUserDetails.getUser().getId();
+        model.addAttribute("posts", postService.getAllPostByUserReferenceId(userId, new ArrayList<>()));
         return "editor/PostLibrary";
     }
 }
